@@ -3,7 +3,7 @@ package net.jakim.testing.steps.definitions.petclinic;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.jakim.testing.steps.libraries.BaseWebActions;
-import net.thucydides.core.annotations.Steps;
+import net.serenitybdd.annotations.Steps;
 
 import static net.jakim.testing.pages.BasePage.PAGE_HEADING_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThat;

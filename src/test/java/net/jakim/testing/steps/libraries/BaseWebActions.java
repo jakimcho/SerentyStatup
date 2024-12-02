@@ -2,8 +2,8 @@ package net.jakim.testing.steps.libraries;
 
 import lombok.extern.slf4j.Slf4j;
 import net.jakim.testing.pages.BasePage;
+import net.serenitybdd.annotations.Step;
 import net.serenitybdd.core.pages.WebElementFacade;
-import net.thucydides.core.annotations.Step;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
 

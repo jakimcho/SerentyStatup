@@ -1,22 +1,22 @@
 package net.jakim.testing.runners;
 
 
-import io.cucumber.junit.CucumberOptions;
-import net.serenitybdd.cucumber.CucumberWithSerenity;
 import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
+import org.junit.platform.suite.api.ConfigurationParameter;
+import org.junit.platform.suite.api.IncludeEngines;
+import org.junit.platform.suite.api.SelectClasspathResource;
+import org.junit.platform.suite.api.Suite;
+
+import static io.cucumber.core.options.Constants.PLUGIN_PROPERTY_NAME;
 
 
-@RunWith( CucumberWithSerenity.class )
-@CucumberOptions(
-        plugin =
-                {
-                        "json:target/cucumber.json",
-                        "junit:target/cucumber.xml"
-                },
-        features = "classpath:features",
-        glue = "net/jakim/testing/steps/definitions",
-        snippets = CucumberOptions.SnippetType.CAMELCASE)
+@Suite
+@IncludeEngines("cucumber")
+@SelectClasspathResource("/features")
+@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME,
+        value = "io.cucumber.core.plugin.SerenityReporterParallel," +
+                "pretty," +
+                "timeline:build/test-results/timeline")
 public class RunBDDTests
 {
 

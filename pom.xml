@@ -13,22 +13,22 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <encoding>UTF-8</encoding>
-        <maven.compiler.target>1.9</maven.compiler.target>
-        <maven.compiler.source>1.9</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
         <surefire.version>3.0.0-M5</surefire.version>
         <failsafe.version>3.0.0-M5</failsafe.version>
 
-        <serenity.version>2.3.8</serenity.version>
-        <serenity.maven.version>2.3.8</serenity.maven.version>
-        <serenity.cucumber6.version>2.3.6</serenity.cucumber6.version>
-        <cucumber.version>6.6.0</cucumber.version>
+        <serenity.version>4.2.8</serenity.version>
+        <serenity.maven.version>4.2.8</serenity.maven.version>
+        <cucumber.version>7.20.1</cucumber.version>
         <log4j.version>1.2.17</log4j.version>
         <slf4j.version>1.7.26</slf4j.version>
-        <junit.version>4.13</junit.version>
-        <assertj.version>3.16.1</assertj.version>
-        <lombok.version>1.18.12</lombok.version>
-        <spring-boot.version>2.3.3.RELEASE</spring-boot.version>
+        <junit-vintage-engine.version>5.11.3</junit-vintage-engine.version>
+        <junit-platform-suite.version>1.11.3</junit-platform-suite.version>
+        <cucumber-junit-platform-engine.version>7.20.1</cucumber-junit-platform-engine.version>
+        <assertj.version>3.26.3</assertj.version>
+        <lombok.version>1.18.36</lombok.version>
+        <logback.version>1.5.12</logback.version>
     </properties>
 
     <dependencies>
@@ -47,8 +47,15 @@
 
         <dependency>
             <groupId>net.serenity-bdd</groupId>
-            <artifactId>serenity-cucumber6</artifactId>
-            <version>${serenity.cucumber6.version}</version>
+            <artifactId>serenity-junit5</artifactId>
+            <version>${serenity.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-cucumber</artifactId>
+            <version>${serenity.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -60,28 +67,48 @@
         </dependency>
 
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-junit</artifactId>
+            <version>${serenity.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertj.version}</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>${junit-platform-suite.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <version>${cucumber-junit-platform-engine.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <version>${junit-platform-suite.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-vintage-engine.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>${junit-vintage-engine.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -90,6 +117,24 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
         </dependency>
 
     </dependencies>
@@ -129,6 +174,10 @@
                 <configuration>
                     <includes>
                         <include>RunBDDTests</include>
+                        <include>**/*Test.java</include>
+                        <include>**/Test*.java</include>
+                        <include>**/*TestSuite.java</include>
+                        <include>**/When*.java</include>
                     </includes>
                 </configuration>
                 <executions>
